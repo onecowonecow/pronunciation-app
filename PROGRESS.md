@@ -27,6 +27,12 @@
 - Needs the user (once, on a real iPhone/simulator): grant mic + speech permissions and confirm hold-to-speak feels right; the orb reacts to mic level only via `VoiceOrb(level:)`.
 - Next: History + Word Bank screens (SwiftData or local JSON), tab bar with orb, port web design refinements; then M2 needs a Supabase project.
 
+## Supabase session
+- User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
+- New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.
+- `save-attempt` edge function implemented (JWT-verified user → service-role writes via tested `saveAttempt` core + Supabase store). **Not deployed and not run under Deno** (no Deno/Supabase CLI here). To deploy: `supabase link --project-ref qnwhtklhucrngnobjbho && supabase functions deploy save-attempt` (or ask a local authenticated Claude session to deploy it).
+- Next: web/native clients need the project URL + **anon (publishable) key** in a config file (not a secret, but I don't have it; add to `web/config.js` / `App` xcconfig) and sign-in (web: email magic link; iOS: Sign in with Apple) before sync can be wired.
+
 ## Current milestone: M0 (repo + foundations), nearly done → next M1
 
 ### Done

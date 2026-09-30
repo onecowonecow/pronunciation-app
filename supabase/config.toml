@@ -1,0 +1,5 @@
+# Supabase CLI config (functions). JWT verification stays on: clients must send a valid user token.
+project_id = "qnwhtklhucrngnobjbho"
+
+[functions.save-attempt]
+verify_jwt = true

@@ -41,3 +41,18 @@ do $$ declare a int; begin
   a := consume_daily_words('00000000-0000-0000-0000-00000000000a','2026-10-01',3,20); assert a=3, 'new day resets';
 end $$;
 select 'RLS + cap tests passed' as result;
+
+-- weak-word upsert keeps progress
+do $$ declare m int; begin
+  perform upsert_weak_words('00000000-0000-0000-0000-00000000000a', '[{"word":"Think","accuracy":40}]');
+  assert (select mastery from word_bank where word='think')=0, 'new word starts at 0';
+  update word_bank set mastery=3 where word='think';
+  perform upsert_weak_words('00000000-0000-0000-0000-00000000000a', '[{"word":"think","accuracy":55,"ipa":"θɪŋk"}]');
+  select mastery into m from word_bank where word='think';
+  assert m=2, 'mastery drops by one, not reset';
+  assert (select last_score from word_bank where word='think')=55 and (select ipa from word_bank where word='think')='θɪŋk';
+  begin set role authenticated; perform upsert_weak_words('00000000-0000-0000-0000-00000000000a','[]');
+    assert false, 'clients must not call it';
+  exception when insufficient_privilege then reset role; end;
+end $$;
+select 'word bank upsert tests passed' as result;
