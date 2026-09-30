@@ -33,6 +33,9 @@
 - Still waiting on user: apply migration 2, deploy `save-attempt`, send the anon key (see Supabase section).
 - Next: sync ProgressLog ↔ Supabase once anon key + sign-in exist; orb as center tab button; port web design refinements; review queue using `next_review_at`.
 
+## Latest routine run (19:47 UTC)
+- CI for 548bc22: iOS build passed (native tabs/progress views compile); swift-core failed one test (week boundary: Linux `dateInterval(of:.weekOfYear)` ignored `firstWeekday`). Fixed `ProgressLog.weekKey` to compute Monday from the weekday number. **Re-verify CI for the fix next run.**
+
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
 - New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.

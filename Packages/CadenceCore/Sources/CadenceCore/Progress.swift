@@ -73,11 +73,14 @@ public struct ProgressLog: Codable, Equatable {
         bank.map { ($0.key, $0.value) }.sorted { $0.entry.lastScore < $1.entry.lastScore }
     }
 
-    /// Monday of the week, yyyy-MM-dd.
+    /// Monday of the week, yyyy-MM-dd. Computed from the weekday number so it doesn't depend on
+    /// Calendar.firstWeekday handling (swift-corelibs on Linux ignores it in dateInterval).
     static func weekKey(_ date: Date, _ calendar: Calendar) -> String {
-        var cal = calendar; cal.firstWeekday = 2
-        let start = cal.dateInterval(of: .weekOfYear, for: date)?.start ?? date
-        let c = cal.dateComponents([.year, .month, .day], from: start)
+        let weekday = calendar.component(.weekday, from: date) // 1 = Sunday ... 7 = Saturday
+        let sinceMonday = (weekday + 5) % 7
+        let day = calendar.startOfDay(for: date)
+        let monday = calendar.date(byAdding: .day, value: -sinceMonday, to: day) ?? day
+        let c = calendar.dateComponents([.year, .month, .day], from: monday)
         return String(format: "%04d-%02d-%02d", c.year!, c.month!, c.day!)
     }
 }
