@@ -1,0 +1,42 @@
+name: Deploy web prototype
+on:
+  push:
+    branches: [main]
+    paths: ["web/**", "tools/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node --test web/logic.test.js
+      - name: Screenshots
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+          mkdir -p _site/prototypes
+          cp -r web/. _site/
+          node tools/screenshots.mjs _site/prototypes
+          cat > _site/prototypes/index.html <<'HTML'
+          <!doctype html><meta name=viewport content="width=device-width,initial-scale=1"><title>Cadence prototypes</title>
+          <body style="background:#0B0B10;color:#F6F2EA;font-family:system-ui;padding:16px"><h1>Cadence prototypes</h1>
+          <p><a style="color:#FF3D9A" href="../">Open the live app</a></p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <img width=240 src=1-practice.png><img width=240 src=2-result.png><img width=240 src=3-history.png><img width=240 src=4-bank.png><img width=240 src=5-league.png>
+          </div></body>
+          HTML
+      - uses: actions/configure-pages@v5
+        with: { enablement: true }
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: "${{ steps.d.outputs.page_url }}" }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4

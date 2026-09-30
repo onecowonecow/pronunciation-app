@@ -1,5 +1,11 @@
 # Progress
 
+## Scope change (latest)
+- **AI Insights (M5) and any Anthropic usage are deferred.** The `insights` function stays a 501 stub; no Anthropic key needed. Scoring uses existing algorithms only (browser speech recognition + word alignment/edit distance here; Azure Speech later for phoneme-level scores).
+- **No-Xcode prototype:** `web/` is a static PWA (practice with orb, scoring, history, word bank, XP/streak, free 20-words/day cap, all in localStorage). Deployed by `.github/workflows/pages.yml` to GitHub Pages, with screenshots of each screen at `/prototypes/`. Local screenshots in `docs/prototypes/`. Scoring logic: `web/logic.js` (9 tests, run by `npm test`).
+- Blocker: Pages must be enabled once: repo Settings → Pages → Source: "GitHub Actions" (the workflow tries to enable it but may lack permission). Then URL is `https://onecowonecow.github.io/pronunciation-app/`.
+- Speech recognition needs Chrome/Edge/Safari (webkitSpeechRecognition) over HTTPS; other browsers use the typed-input fallback. Scores from browser recognition are approximate, not phoneme-level.
+
 ## Current milestone: M0 (repo + foundations), nearly done → next M1
 
 ### Done

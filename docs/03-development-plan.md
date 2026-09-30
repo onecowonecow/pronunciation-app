@@ -14,7 +14,7 @@ Working name: **Cadence** (placeholder; rename freely).
 | **Score History** | Timeline chart (Swift Charts) of overall + sub-scores, per-session detail, filters by week/month, personal bests, streak calendar. |
 | **Word Bank** | Auto-collects words scoring < 80; manual add; each word has a mastery level, phoneme breakdown, IPA, spaced-repetition review queue. |
 | **Leaderboard** | Weekly league (XP earned from practice), friends-agnostic global + country; opt-in with display name/avatar; anti-cheat via server-side XP. |
-| **AI Insights** | Claude summarizes last 7/30 days: weakest phonemes, patterns (e.g. /θ/ → /s/, final consonant dropping), a 3-item weekly focus plan, encouraging tone. Premium. |
+| **AI Insights** *(DEFERRED: not in current scope)* | Claude summarizes last 7/30 days: weakest phonemes, patterns (e.g. /θ/ → /s/, final consonant dropping), a 3-item weekly focus plan, encouraging tone. Premium. |
 | **Account & Settings** | Sign in with Apple, profile, target accent, daily goal, reminders (local notifications), data export, **delete account**, privacy links. |
 | **Premium / Paywall** | One honest paywall: monthly + annual, 7-day trial, clear terms, **Restore Purchases**, manage subscription link. |
 | **Onboarding** | 60-second flow: goal → level check (3 sentences) → immediate first score → paywall *after* value is shown. |
