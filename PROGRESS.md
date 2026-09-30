@@ -8,12 +8,13 @@
 - SQL tests on real Postgres: `supabase/tests/run.sh` (RLS isolation, forged-write rejection, cap logic) ✅ passing
 - Edge function stubs (speech-token, save-attempt, insights, rc-webhook, delete-account) returning 501
 - Shared pure TS logic (`supabase/functions/_shared/logic.ts`: XP, week/local day, weak words, SRS, premium, RC mapping) with 7 passing tests (`npm test`)
+- M1 backend core: `_shared/saveAttempt.ts` (validation, free cap, premium gate for Free Speak, word bank, server-side XP) behind a `Store` interface; 7 tests. Not yet wired into `save-attempt/index.ts` (needs Deno + Supabase client)
 - Swift package `Packages/CadenceCore` (score bands, free-tier math + XCTests) — written but NOT compiled here (no Swift toolchain in sandbox)
 - XcodeGen `project.yml`, app skeleton, design tokens, Voice Orb prototype — NOT compiled here
 - GitHub Actions CI: backend (Linux), swift test (Linux), iOS build (macos-15) — first run not yet observed
 
 ### Next
-- M1: audio engine + Azure assessment client + result screen (needs Azure key for real testing); implement `speech-token` and `save-attempt` (testable here with fakes)
+- M1: audio engine + Azure assessment client + result screen (needs Azure key for real testing); wire `save-attempt` entrypoint to Supabase store; implement `speech-token`
 - Check first CI run and fix any Swift compile errors it reports
 
 ### Blockers needing the user
