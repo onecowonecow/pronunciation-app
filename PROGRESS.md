@@ -11,6 +11,11 @@
 - Design pass on web prototype using taste skills (redesign-existing-projects audit): focus/hover/pressed states, skip link, favicon + meta, tabular numerals, balanced text wrap, grain surface, active-tab indicator, composed empty states, clearer chip colors. Screenshots regenerated in `docs/prototypes/`.
 - Next: port these refinements to SwiftUI tokens; M2 client wiring (Supabase auth/sync for the web prototype is optional, needs Supabase project).
 
+## Latest routine run (07:48 UTC)
+- Ported the scoring/alignment algorithm from `web/logic.js` to Swift (`Packages/CadenceCore/.../Alignment.swift`) with XCTests, so the native app scores identically to the web prototype. Pushed as 32ca5a2; **its CI run (swift-core + ios) has not been checked yet: next run should confirm it compiles and fix anything CI reports.**
+- Design-pass Pages deploy (ac06593) succeeded.
+- Next: check CI for 32ca5a2; M1 native pieces (AudioEngine level meter + SFSpeechRecognizer wrapper behind a protocol, result screen using tokens); port web design refinements to SwiftUI.
+
 ## Current milestone: M0 (repo + foundations), nearly done → next M1
 
 ### Done
