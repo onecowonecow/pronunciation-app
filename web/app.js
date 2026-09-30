@@ -15,7 +15,8 @@ document.querySelectorAll("nav button").forEach((b) => b.onclick = () => {
 
 // ---- sentences
 const cats = [...new Set(SENTENCES.map((s) => s.cat))];
-cats.forEach((c) => { const b = document.createElement("button"); b.textContent = c; b.onclick = () => { state.cat = c; state.idx = 0; pick(); }; $("cats").append(b); });
+cats.forEach((c) => { const b = document.createElement("button"); b.textContent = c; b.dataset.cat = c; b.onclick = () => { state.cat = c; state.idx = 0; pick(); markCat(); }; $("cats").append(b); });
+function markCat() { document.querySelectorAll("#cats button").forEach((x) => x.classList.toggle("on", x.dataset.cat === state.cat)); }
 const list = () => SENTENCES.filter((s) => s.cat === state.cat);
 function pick() { $("ref").textContent = list()[state.idx % list().length].text; $("result").hidden = true; state.score = null; $("ring").textContent = ""; }
 $("next").onclick = () => { state.idx++; pick(); };
@@ -114,16 +115,16 @@ function showResult(r, limited) {
 function renderCap() { $("cap").textContent = `${wordsRemaining(state.usage[localDay()] ?? 0)} free words left today`; }
 function render() {
   renderCap();
-  $("hlist").innerHTML = state.history.slice(-20).reverse().map((h) => `<li><span>${h.ref.slice(0, 34)}…</span><b>${h.overall}</b></li>`).join("") || "<li class=muted>No attempts yet.</li>";
+  $("hlist").innerHTML = state.history.slice(-20).reverse().map((h) => `<li><span>${h.ref.slice(0, 34)}…</span><b>${h.overall}</b></li>`).join("") || "<li class=muted>No attempts yet. Read a sentence aloud and your scores will chart here.</li>";
   const ch = $("chart").getContext("2d"), W = 600, H = 200; ch.clearRect(0, 0, W, H);
   const pts = state.history.slice(-30); ch.strokeStyle = "#FF3D9A"; ch.lineWidth = 3; ch.beginPath();
   pts.forEach((p, i) => { const x = pts.length < 2 ? W / 2 : 20 + i * (W - 40) / (pts.length - 1), y = H - 10 - (H - 20) * p.overall / 100; i ? ch.lineTo(x, y) : ch.moveTo(x, y); }); ch.stroke();
   const words = Object.entries(state.bank).sort((a, b) => a[1].last - b[1].last);
-  $("blist").innerHTML = words.map(([w, v]) => `<li><span>${w}</span><span>score ${Math.round(v.last)} · level ${v.mastery}/5</span></li>`).join("") || "<li class=muted>Words you miss will collect here.</li>";
+  $("blist").innerHTML = words.map(([w, v]) => `<li><span>${w}</span><span>score ${Math.round(v.last)} · level ${v.mastery}/5</span></li>`).join("") || "<li class=muted>Nothing to review. Words you score under 80 collect here for practice.</li>";
   $("xp").textContent = (state.xp[weekKey()] ?? 0) + " XP";
   const days = new Set(state.history.map((h) => localDay(new Date(h.t)))); let s = 0, d = new Date();
   if (!days.has(localDay(d))) d.setDate(d.getDate() - 1);
   while (days.has(localDay(d))) { s++; d.setDate(d.getDate() - 1); } $("streak").textContent = s;
 }
-pick(); render();
+pick(); markCat(); render();
 window.__cadence = { submit, state }; // for tests/screenshots

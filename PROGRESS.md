@@ -6,6 +6,11 @@
 - Blocker: Pages must be enabled once: repo Settings → Pages → Source: "GitHub Actions" (the workflow tries to enable it but may lack permission). Then URL is `https://onecowonecow.github.io/pronunciation-app/`.
 - Speech recognition needs Chrome/Edge/Safari (webkitSpeechRecognition) over HTTPS; other browsers use the typed-input fallback. Scores from browser recognition are approximate, not phoneme-level.
 
+## Latest session (routine)
+- Pages deploy confirmed live (HTTP 200) and CI green (backend, swift-core, ios).
+- Design pass on web prototype using taste skills (redesign-existing-projects audit): focus/hover/pressed states, skip link, favicon + meta, tabular numerals, balanced text wrap, grain surface, active-tab indicator, composed empty states, clearer chip colors. Screenshots regenerated in `docs/prototypes/`.
+- Next: port these refinements to SwiftUI tokens; M2 client wiring (Supabase auth/sync for the web prototype is optional, needs Supabase project).
+
 ## Current milestone: M0 (repo + foundations), nearly done → next M1
 
 ### Done
