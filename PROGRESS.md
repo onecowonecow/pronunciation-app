@@ -34,7 +34,7 @@
 - Next: sync ProgressLog ↔ Supabase once anon key + sign-in exist; orb as center tab button; port web design refinements; review queue using `next_review_at`.
 
 ## Latest routine run (19:47 UTC)
-- CI for 548bc22: iOS build passed (native tabs/progress views compile); swift-core failed one test (week boundary: Linux `dateInterval(of:.weekOfYear)` ignored `firstWeekday`). Fixed `ProgressLog.weekKey` to compute Monday from the weekday number. **Re-verify CI for the fix next run.**
+- CI for 548bc22: iOS build passed (native tabs/progress views compile); swift-core failed one test (week boundary: Linux `dateInterval(of:.weekOfYear)` ignored `firstWeekday`). Fixed `ProgressLog.weekKey` to compute Monday from the weekday number. The fix did not change the result: the real cause was the test's expected XP (a perfect 1-word read earns 2 XP with the quality bonus; weeks were already separating correctly). Test corrected in the 22:47 run; **re-verify CI next run.** The weekKey rewrite is harmless and kept.
 
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).

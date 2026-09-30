@@ -49,8 +49,9 @@ final class ProgressTests: XCTestCase {
         let r = Alignment.score(reference: "hello", heard: "hello")
         log.record(r, reference: "hello", scoredCount: 1, at: date("2026-09-27T12:00:00Z"), calendar: cal) // Sunday
         log.record(r, reference: "hello", scoredCount: 1, at: date("2026-09-28T12:00:00Z"), calendar: cal) // Monday
-        XCTAssertEqual(log.xp(inWeekOf: date("2026-09-27T12:00:00Z"), calendar: cal), 1, "Sunday belongs to the prior week")
-        XCTAssertEqual(log.xp(inWeekOf: date("2026-09-30T12:00:00Z"), calendar: cal), 1)
+        // A perfect one-word read earns 1 + ceil(0.5) bonus = 2 XP.
+        XCTAssertEqual(log.xp(inWeekOf: date("2026-09-27T12:00:00Z"), calendar: cal), 2, "Sunday belongs to the prior week")
+        XCTAssertEqual(log.xp(inWeekOf: date("2026-09-30T12:00:00Z"), calendar: cal), 2, "Monday starts a new week")
         XCTAssertEqual(log.xpByWeek.count, 2)
     }
 
