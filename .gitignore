@@ -1,0 +1,6 @@
+.env
+*.xcodeproj
+.build/
+node_modules/
+DerivedData/
+.DS_Store

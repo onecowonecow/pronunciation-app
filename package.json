@@ -1,0 +1,6 @@
+{
+  "name": "cadence-backend-tests",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --experimental-strip-types --test supabase/functions/_shared/*.test.ts && ./supabase/tests/run.sh" }
+}
