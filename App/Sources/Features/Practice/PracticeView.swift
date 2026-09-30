@@ -3,6 +3,7 @@ import CadenceCore
 
 struct PracticeView: View {
     @StateObject private var vm = PracticeViewModel()
+    @EnvironmentObject private var store: ProgressStore
 
     var body: some View {
         ScrollView {
@@ -21,7 +22,7 @@ struct PracticeView: View {
             .padding(20)
         }
         .background(Tokens.ink.ignoresSafeArea())
-        .preferredColorScheme(.dark)
+        .onAppear { vm.store = store }
     }
 
     private var header: some View {

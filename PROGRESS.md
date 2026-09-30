@@ -27,6 +27,12 @@
 - Needs the user (once, on a real iPhone/simulator): grant mic + speech permissions and confirm hold-to-speak feels right; the orb reacts to mic level only via `VoiceOrb(level:)`.
 - Next: History + Word Bank screens (SwiftData or local JSON), tab bar with orb, port web design refinements; then M2 needs a Supabase project.
 
+## Latest routine run (16:47 UTC)
+- CI confirmed green on all pushes through 42e8232, **including the first compile of the native practice screen** (iOS build + Swift tests).
+- Added `ProgressLog` (history, word bank with mastery/graduation, weekly XP, streak) in CadenceCore with 7 XCTests (week boundary is Monday; streak allows yesterday). App: `ProgressStore` (JSON persistence), History (Swift Charts), Word Bank, Week tabs, TabView root, Practice records attempts. **CI for this push not yet checked.**
+- Still waiting on user: apply migration 2, deploy `save-attempt`, send the anon key (see Supabase section).
+- Next: sync ProgressLog ↔ Supabase once anon key + sign-in exist; orb as center tab button; port web design refinements; review queue using `next_review_at`.
+
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
 - New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.

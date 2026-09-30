@@ -9,6 +9,7 @@ final class PracticeViewModel: ObservableObject {
     @Published var category = Sentences.categories[0] { didSet { index = 0; reset() } }
     @Published private(set) var index = 0
 
+    weak var store: ProgressStore?
     private let recognizer = SpeechRecognizer()
     private var session: PracticeSession?
     private let defaults = UserDefaults.standard
@@ -43,10 +44,15 @@ final class PracticeViewModel: ObservableObject {
 
     func pressUp() {
         guard let s = session, s.state == .listening else { return }
+        let usedBefore = s.wordsUsedToday
         Task {
             await s.finish()
             state = s.state
             defaults.set(s.wordsUsedToday, forKey: dayKey)
+            if case let .scored(result, _) = s.state {
+                let scored = min(result.words.count, max(0, FreeTier.dailyWordCap - usedBefore))
+                store?.record(result, reference: reference, scoredCount: isPremium ? result.words.count : scored)
+            }
             objectWillChange.send()
         }
     }
