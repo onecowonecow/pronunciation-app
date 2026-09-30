@@ -45,6 +45,7 @@
 - Check first CI run and fix any Swift compile errors it reports
 
 ### Blockers needing the user
+- **Supabase MCP authentication (needs you):** `.mcp.json` now points at project `qnwhtklhucrngnobjbho`, but the OAuth login is interactive. In a regular terminal on your machine run `claude`, then `/mcp` → select `supabase` → Authenticate. Cloud/routine sessions can't complete it, so until then apply `supabase/migrations/*.sql` yourself (Supabase dashboard SQL editor, or `supabase db push`) and tell me when done.
 - Apple Developer enrollment, Azure/Supabase/RevenueCat/Anthropic accounts + keys (see docs/02-your-setup-steps.md)
 - Open the repo in Xcode 26 once (`brew install xcodegen && xcodegen generate`) to confirm the skeleton builds; Swift here is uncompiled
 - Deno isn't in the sandbox, so edge-function `index.ts` entrypoints are untested; logic lives in `_shared` and is tested under Node
