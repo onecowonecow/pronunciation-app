@@ -24,3 +24,10 @@ final class CadenceCoreTests: XCTestCase {
         XCTAssertEqual(FreeTier(wordsUsedToday: -3).wordsRemaining, 20)
     }
 }
+
+final class SentencesTests: XCTestCase {
+    func testCategoriesOrderedAndUnique() {
+        XCTAssertEqual(Sentences.categories, ["everyday", "work", "interview", "exam"])
+        XCTAssertEqual(Sentences.inCategory("everyday").count, 2)
+    }
+}

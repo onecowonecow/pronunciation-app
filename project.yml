@@ -18,3 +18,4 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_NSMicrophoneUsageDescription: "Cadence listens while you speak to score your pronunciation."
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Cadence uses speech recognition to check what you said against the sentence."

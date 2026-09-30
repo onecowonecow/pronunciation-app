@@ -21,6 +21,12 @@
 - Added `PracticeSession` (record → score → free-tier cap state machine) + `SpeechRecognizing` protocol in CadenceCore, with fake-recognizer XCTests. **CI for this push not yet checked; verify next run.**
 - Next: app-target `SFSpeechRecognizer` wrapper conforming to `SpeechRecognizing`, SwiftUI practice/result screens bound to `PracticeSession`, port web design refinements to SwiftUI tokens.
 
+## Latest routine run (13:47 UTC)
+- CI confirmed green for the PracticeSession push.
+- Native M1 slice added: `SpeechRecognizer` (SFSpeechRecognizer + AVAudioEngine, on-device when supported, mic level callback), `PracticeViewModel`, `PracticeView` (category chips, hold-to-speak, orb → score ring, per-word chips with tap-to-hear via AVSpeechSynthesizer, free-cap messages), shared `Sentences` in CadenceCore, speech-recognition Info.plist string. **Not yet compiled: the iOS CI job on this push is the first check; fix anything it reports next run.**
+- Needs the user (once, on a real iPhone/simulator): grant mic + speech permissions and confirm hold-to-speak feels right; the orb reacts to mic level only via `VoiceOrb(level:)`.
+- Next: History + Word Bank screens (SwiftData or local JSON), tab bar with orb, port web design refinements; then M2 needs a Supabase project.
+
 ## Current milestone: M0 (repo + foundations), nearly done → next M1
 
 ### Done
