@@ -16,6 +16,11 @@
 - Design-pass Pages deploy (ac06593) succeeded.
 - Next: check CI for 32ca5a2; M1 native pieces (AudioEngine level meter + SFSpeechRecognizer wrapper behind a protocol, result screen using tokens); port web design refinements to SwiftUI.
 
+## Latest routine run (10:48 UTC)
+- CI confirmed green for the Swift alignment port (swift-core + ios jobs pass).
+- Added `PracticeSession` (record → score → free-tier cap state machine) + `SpeechRecognizing` protocol in CadenceCore, with fake-recognizer XCTests. **CI for this push not yet checked; verify next run.**
+- Next: app-target `SFSpeechRecognizer` wrapper conforming to `SpeechRecognizing`, SwiftUI practice/result screens bound to `PracticeSession`, port web design refinements to SwiftUI tokens.
+
 ## Current milestone: M0 (repo + foundations), nearly done → next M1
 
 ### Done
