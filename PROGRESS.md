@@ -52,6 +52,11 @@
 - Added `App/Resources/PrivacyInfo.xcprivacy` (no tracking, no collected data yet, UserDefaults reason CA92.1) and included it via `project.yml`. **Must be updated when sync ships** (collected data: user ID, scores/performance data linked to the user, not used for tracking) and re-checked against the real App Privacy answers in App Store Connect.
 - Remaining unblocked work is small (orb as centre tab, onboarding flow, VoiceOver/Dynamic Type polish). Everything else needs the user: Supabase steps, anon key, RevenueCat, Apple Developer account, legal review.
 
+## Latest routine run (10:47 UTC)
+- CI green on 4164f89 (privacy manifest + reminder refresh compile and pass).
+- Web onboarding: first-run goal picker with the orb, drops the user on a matching first sentence; shown once (`cadence.onboarded`), skippable. Flow and the "never shown twice" rule are asserted in `tools/screenshots.mjs` (run by Pages CI); screenshot `0-onboarding.png` added to the gallery.
+- Not yet done: native SwiftUI onboarding (same flow), the post-first-score paywall (needs RevenueCat + App Store Connect product), orb as centre tab button, VoiceOver/Dynamic Type pass.
+
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
 - New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.

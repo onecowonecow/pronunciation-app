@@ -11,7 +11,21 @@ const srv = createServer(async (q, s) => {
 }).listen(0);
 const url = `http://localhost:${srv.address().port}/`;
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
-const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+// First-run onboarding in a fresh context
+const fresh = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+await fresh.goto(url);
+await fresh.waitForSelector("#onboard:not([hidden])");
+await fresh.screenshot({ path: `${out}/0-onboarding.png` });
+await fresh.click("#ob-goals button:nth-child(3)");
+const obCat = await fresh.textContent("#ref");
+if ((await fresh.isVisible("#onboard")) || !obCat.includes("greatest strength")) { console.error("onboarding flow failed", obCat); process.exit(1); }
+await fresh.reload();
+if (await fresh.isVisible("#onboard")) { console.error("onboarding shown twice"); process.exit(1); }
+await fresh.close();
+
+const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+await ctx.addInitScript(() => { try { localStorage.setItem("cadence.onboarded", "1"); } catch {} });
+const page = await ctx.newPage();
 const errors = []; page.on("pageerror", (e) => errors.push(e.message));
 await page.goto(url);
 await page.screenshot({ path: `${out}/1-practice.png` });

@@ -26,7 +26,7 @@ jobs:
           <body style="background:#0B0B10;color:#F6F2EA;font-family:system-ui;padding:16px"><h1>Cadence prototypes</h1>
           <p><a style="color:#FF3D9A" href="../">Open the live app</a></p>
           <div style="display:flex;flex-wrap:wrap;gap:12px">
-          <img width=240 src=1-practice.png><img width=240 src=2-result.png><img width=240 src=3-history.png><img width=240 src=4-bank.png><img width=240 src=5-league.png>
+          <img width=240 src=0-onboarding.png><img width=240 src=1-practice.png><img width=240 src=2-result.png><img width=240 src=3-history.png><img width=240 src=4-bank.png><img width=240 src=5-league.png>
           </div></body>
           HTML
       - uses: actions/configure-pages@v5

@@ -54,3 +54,17 @@ nav button{white-space:nowrap;font-size:14px}
 
 .sub{margin-top:36px;font-size:22px}.left{text-align:left;margin-inline:0}.row.left{justify-content:flex-start}
 button.danger{color:#ffb4a8;border-color:#ffb4a844}button.danger:hover{background:#ff6b5a22}
+
+.onboard{position:fixed;inset:0;z-index:20;background:var(--ink);display:grid;align-items:end;padding:20px 20px calc(28px + env(safe-area-inset-bottom))}
+.onboard[hidden]{display:none}
+.ob-card{max-width:520px;width:100%;margin:0 auto;animation:rise .4s var(--ease)}
+.ob-card h2{font-size:clamp(30px,8vw,40px);line-height:1.08;margin:6px 0 10px}
+.ob-step{margin:0;text-align:left;font-size:13px;letter-spacing:.04em}
+.ob-goals{display:grid;gap:10px;margin:22px 0 14px}
+.ob-goals button{text-align:left;padding:16px 18px;font-size:18px;border-radius:14px}
+button.link{background:none;border:0;color:#ffffff99;padding:10px 0;text-decoration:underline;text-underline-offset:3px}
+
+.onboard{align-items:stretch;grid-template-rows:1fr auto}.ob-card{grid-row:2}
+.ob-orb{position:absolute;top:12vh;left:50%;width:min(62vw,260px);aspect-ratio:1;translate:-50% 0;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#FFB020 0%,#FF3D9A 45%,#7C5CFF 80%,#7C5CFF00 100%);filter:blur(10px);opacity:.9;animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.07)}}

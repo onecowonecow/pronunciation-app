@@ -126,6 +126,23 @@ function render() {
   if (!days.has(localDay(d))) d.setDate(d.getDate() - 1);
   while (days.has(localDay(d))) { s++; d.setDate(d.getDate() - 1); } $("streak").textContent = s;
 }
+// ---- onboarding: goal, then straight into a first sentence
+const GOALS = [["everyday", "Everyday conversation"], ["work", "Work and meetings"], ["interview", "Job interviews"], ["exam", "An English exam"]];
+function finishOnboarding(goal) {
+  try { localStorage.setItem("cadence.onboarded", "1"); } catch {}
+  if (goal) { state.cat = goal; state.idx = 0; pick(); markCat(); }
+  $("onboard").hidden = true;
+  if (goal) $("status").textContent = "Hold the button and read the sentence aloud. That's your first score.";
+}
+function startOnboarding() {
+  let seen = false; try { seen = localStorage.getItem("cadence.onboarded") === "1"; } catch {}
+  if (seen || state.history.length) return;
+  $("ob-goals").innerHTML = "";
+  GOALS.forEach(([id, label]) => { const b = document.createElement("button"); b.textContent = label; b.onclick = () => finishOnboarding(id); $("ob-goals").append(b); });
+  $("ob-skip").onclick = () => finishOnboarding(null);
+  $("onboard").hidden = false; $("ob-goals").firstChild.focus();
+}
+
 // ---- data controls (export / delete)
 const DATA_KEYS = ["history", "bank", "usage", "xp"];
 $("export").onclick = () => {
@@ -147,5 +164,5 @@ $("wipe").onclick = () => {
   b.textContent = "Delete all my data"; $("datamsg").textContent = "All data deleted."; render();
 };
 
-pick(); markCat(); render();
+pick(); markCat(); render(); startOnboarding();
 window.__cadence = { submit, state }; // for tests/screenshots
