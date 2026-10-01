@@ -46,6 +46,12 @@
 - Native Settings tab: daily practice reminder (local notification via UNUserNotificationCenter, time picker), export my data (ShareLink JSON), delete all (confirmation dialog). Reminder copy + time clamping are pure logic in CadenceCore with XCTests. **CI for this push not yet checked** (iOS build compiles the new views; Linux job runs the new tests). Reminder text is fixed at scheduling time (streak/word count as of then); a later refinement can reschedule after each attempt.
 - Next: orb as centre tab button; reschedule reminder after each attempt; sync once anon key + migration 2 + function deploy are done.
 
+## Latest routine run (07:47 UTC)
+- CI green on 32bc4ea (Settings tab, reminders, export/delete compile; Reminder tests pass).
+- Reminder text now refreshes after every attempt (streak / Word Bank count).
+- Added `App/Resources/PrivacyInfo.xcprivacy` (no tracking, no collected data yet, UserDefaults reason CA92.1) and included it via `project.yml`. **Must be updated when sync ships** (collected data: user ID, scores/performance data linked to the user, not used for tracking) and re-checked against the real App Privacy answers in App Store Connect.
+- Remaining unblocked work is small (orb as centre tab, onboarding flow, VoiceOver/Dynamic Type polish). Everything else needs the user: Supabase steps, anon key, RevenueCat, Apple Developer account, legal review.
+
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
 - New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.

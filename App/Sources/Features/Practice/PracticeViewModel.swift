@@ -29,6 +29,14 @@ final class PracticeViewModel: ObservableObject {
     }
     private var usedToday: Int { defaults.integer(forKey: dayKey) }
 
+    /// Keep the reminder text current (streak and Word Bank size change after each attempt).
+    private func refreshReminder() {
+        guard defaults.bool(forKey: "reminder.enabled"), let log = store?.log else { return }
+        let minutes = defaults.object(forKey: "reminder.minutes") as? Int ?? 19 * 60
+        let streak = log.streak(), words = log.bank.count
+        Task { _ = await Reminders.enable(hour: minutes / 60, minute: minutes % 60, streak: streak, weakWords: words) }
+    }
+
     func next() { index += 1; reset() }
 
     func reset() {
@@ -52,6 +60,7 @@ final class PracticeViewModel: ObservableObject {
             if case let .scored(result, _) = s.state {
                 let scored = min(result.words.count, max(0, FreeTier.dailyWordCap - usedBefore))
                 store?.record(result, reference: reference, scoredCount: isPremium ? result.words.count : scored)
+                refreshReminder()
             }
             objectWillChange.send()
         }

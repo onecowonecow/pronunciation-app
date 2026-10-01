@@ -8,7 +8,7 @@ targets:
   Cadence:
     type: application
     platform: iOS
-    sources: [App/Sources]
+    sources: [App/Sources, App/Resources]
     dependencies: [{ package: CadenceCore }]
     settings:
       base:
