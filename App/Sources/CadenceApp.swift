@@ -15,6 +15,7 @@ struct RootView: View {
             HistoryView().tabItem { Label("History", systemImage: "chart.xyaxis.line") }
             WordBankView().tabItem { Label("Word Bank", systemImage: "text.book.closed") }
             WeekView().tabItem { Label("Week", systemImage: "flame") }
+            SettingsView().tabItem { Label("Settings", systemImage: "gearshape") }
         }
         .tint(Tokens.magenta)
     }

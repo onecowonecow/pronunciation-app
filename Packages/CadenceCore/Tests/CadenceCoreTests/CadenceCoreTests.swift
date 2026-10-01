@@ -31,3 +31,18 @@ final class SentencesTests: XCTestCase {
         XCTAssertEqual(Sentences.inCategory("everyday").count, 2)
     }
 }
+
+final class ReminderTests: XCTestCase {
+    func testMessages() {
+        XCTAssertEqual(Reminder.message(streak: 0, weakWordCount: 0), "Read one sentence aloud and see your score.")
+        XCTAssertEqual(Reminder.message(streak: 0, weakWordCount: 1), "1 word is in your Word Bank. Two minutes is enough.")
+        XCTAssertEqual(Reminder.message(streak: 0, weakWordCount: 3), "3 words are in your Word Bank. Two minutes is enough.")
+        XCTAssertEqual(Reminder.message(streak: 4, weakWordCount: 0), "Keep your 4-day streak going with one sentence.")
+        XCTAssertEqual(Reminder.message(streak: 4, weakWordCount: 2), "Day 5 is waiting. 2 words need another look.")
+        XCTAssertFalse(Reminder.message(streak: 9, weakWordCount: 9).contains("!"))
+    }
+    func testClampedTime() {
+        XCTAssertTrue(Reminder.clampedTime(hour: 30, minute: -5) == (23, 0))
+        XCTAssertTrue(Reminder.clampedTime(hour: 8, minute: 15) == (8, 15))
+    }
+}

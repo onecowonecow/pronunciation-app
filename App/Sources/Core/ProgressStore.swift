@@ -21,4 +21,23 @@ final class ProgressStore: ObservableObject {
         log.record(result, reference: reference, scoredCount: scoredCount)
         if let data = try? JSONEncoder().encode(log) { try? data.write(to: url, options: .atomic) }
     }
+
+    /// Pretty-printed JSON of everything stored, written to a temp file for sharing.
+    func exportFile() throws -> URL {
+        let enc = JSONEncoder()
+        enc.outputFormatting = [.prettyPrinted, .sortedKeys]
+        enc.dateEncodingStrategy = .iso8601
+        let out = FileManager.default.temporaryDirectory.appendingPathComponent("cadence-data.json")
+        try enc.encode(log).write(to: out, options: .atomic)
+        return out
+    }
+
+    /// Removes all progress from memory and disk, plus the daily usage counters.
+    func deleteAll() {
+        log = ProgressLog()
+        try? FileManager.default.removeItem(at: url)
+        for key in UserDefaults.standard.dictionaryRepresentation().keys where key.hasPrefix("usage.") {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+    }
 }

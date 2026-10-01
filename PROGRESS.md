@@ -41,6 +41,11 @@
 - M6 slice: web prototype "Your data" controls (export JSON, two-step delete all) verified in headless Chromium (download + wipe flow asserted in `tools/screenshots.mjs`, which Pages CI runs). Draft privacy policy and terms in `docs/legal-*-DRAFT.md`: **need legal review and a support email (marked TODO) before publishing; users must host them at public URLs for App Store Connect.**
 - Next: native export/delete (Settings), local review reminders (UNUserNotificationCenter) for M3, orb as centre tab; sync still waiting on the anon key + migration 2 + function deploy.
 
+## Latest routine run (04:47 UTC)
+- CI green on 41d069a (all jobs) and Pages deployed (live app has the Your data controls).
+- Native Settings tab: daily practice reminder (local notification via UNUserNotificationCenter, time picker), export my data (ShareLink JSON), delete all (confirmation dialog). Reminder copy + time clamping are pure logic in CadenceCore with XCTests. **CI for this push not yet checked** (iOS build compiles the new views; Linux job runs the new tests). Reminder text is fixed at scheduling time (streak/word count as of then); a later refinement can reschedule after each attempt.
+- Next: orb as centre tab button; reschedule reminder after each attempt; sync once anon key + migration 2 + function deploy are done.
+
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
 - New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.
