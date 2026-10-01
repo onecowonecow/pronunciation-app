@@ -21,7 +21,7 @@ struct OnboardingView: View {
                 Spacer(minLength: 24)
                 Text("Welcome to Cadence").font(.footnote).foregroundStyle(Tokens.paper.opacity(0.6))
                 Text("What are you practicing for?")
-                    .font(.system(size: 34, design: .serif)).foregroundStyle(Tokens.paper)
+                    .font(.system(.largeTitle, design: .serif)).foregroundStyle(Tokens.paper)
                     .padding(.top, 4)
                 Text("Pick one. You can change it any time.")
                     .font(.callout).foregroundStyle(Tokens.paper.opacity(0.6)).padding(.top, 6)

@@ -12,7 +12,7 @@ struct PracticeView: View {
                 header
                 categories
                 Text(vm.reference)
-                    .font(.system(size: 28, design: .serif))
+                    .font(.system(.title, design: .serif))
                     .foregroundStyle(Tokens.paper)
                     .fixedSize(horizontal: false, vertical: true)
                 orb
@@ -29,7 +29,7 @@ struct PracticeView: View {
 
     private var header: some View {
         HStack {
-            Text("Cadence").font(.system(size: 30, design: .serif)).foregroundStyle(Tokens.paper)
+            Text("Cadence").font(.system(.largeTitle, design: .serif)).foregroundStyle(Tokens.paper)
             Spacer()
             Text("\(vm.wordsRemaining) free words left today")
                 .font(.footnote.monospacedDigit()).foregroundStyle(Tokens.paper.opacity(0.8))
@@ -119,7 +119,7 @@ struct ResultView: View {
         }
     }
     private func stat(_ label: String, _ v: Int?) -> some View {
-        VStack { Text(v.map(String.init) ?? "–").font(.system(size: 22, weight: .semibold, design: .serif)).monospacedDigit()
+        VStack { Text(v.map(String.init) ?? "–").font(.system(.title3, design: .serif).weight(.semibold)).monospacedDigit()
             Text(label).font(.caption).foregroundStyle(Tokens.paper.opacity(0.6)) }
             .frame(maxWidth: .infinity).padding(.vertical, 10)
             .background(Tokens.paper.opacity(0.05), in: RoundedRectangle(cornerRadius: 12))

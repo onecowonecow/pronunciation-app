@@ -4,7 +4,7 @@ import CadenceCore
 
 private struct ScreenTitle: View {
     let text: String
-    var body: some View { Text(text).font(.system(size: 28, design: .serif)).foregroundStyle(Tokens.paper) }
+    var body: some View { Text(text).font(.system(.title, design: .serif)).foregroundStyle(Tokens.paper) }
 }
 
 private struct EmptyNote: View {

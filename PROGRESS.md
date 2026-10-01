@@ -62,6 +62,12 @@
 - Native onboarding (`OnboardingView`, full-screen cover on first launch, goal stored in `@AppStorage("goal")`, Practice switches category on change). **First compile pending on CI.** Paywall step intentionally omitted until RevenueCat exists.
 - Remaining unblocked: orb as centre tab button, VoiceOver / Dynamic Type pass. After that everything is blocked on the user.
 
+## Latest routine run (16:47 UTC) — UNBLOCKED WORK IS DONE
+- CI green on 88fe01a (native onboarding compiles).
+- Dynamic Type: serif headings (practice sentence, titles, stats, onboarding) now use text styles so they scale; the score ring's centre number stays fixed on purpose. Needs an on-device check with large text sizes.
+- **Everything I can do without you is finished.** Deliberately not done: orb as a custom centre tab button (needs on-device iteration to feel right; standard TabView kept). The routine will keep firing every 3 hours with nothing to do until a blocker below clears; consider pausing it.
+- Waiting on you, in order: (1) apply migration `20260930000002_word_bank_upsert.sql`; (2) deploy `save-attempt` (`supabase functions deploy save-attempt`); (3) send the Supabase anon (publishable) key; (4) review the draft privacy policy / terms and add a support email; (5) RevenueCat + App Store Connect product (premium_monthly $8.99) for the paywall; (6) Apple Developer account for TestFlight; (7) open the generated Xcode project once on a device to try hold-to-speak, permissions and large text.
+
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
 - New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.
