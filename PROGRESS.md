@@ -36,6 +36,11 @@
 ## Latest routine run (19:47 UTC)
 - CI for 548bc22: iOS build passed (native tabs/progress views compile); swift-core failed one test (week boundary: Linux `dateInterval(of:.weekOfYear)` ignored `firstWeekday`). Fixed `ProgressLog.weekKey` to compute Monday from the weekday number. The fix did not change the result: the real cause was the test's expected XP (a perfect 1-word read earns 2 XP with the quality bonus; weeks were already separating correctly). Test corrected in the 22:47 run; **re-verify CI next run.** The weekKey rewrite is harmless and kept.
 
+## Latest routine run (01:48 UTC)
+- CI green on a58276c (all three jobs): Swift tests now pass; the earlier week-boundary failure was a wrong test expectation, fixed.
+- M6 slice: web prototype "Your data" controls (export JSON, two-step delete all) verified in headless Chromium (download + wipe flow asserted in `tools/screenshots.mjs`, which Pages CI runs). Draft privacy policy and terms in `docs/legal-*-DRAFT.md`: **need legal review and a support email (marked TODO) before publishing; users must host them at public URLs for App Store Connect.**
+- Next: native export/delete (Settings), local review reminders (UNUserNotificationCenter) for M3, orb as centre tab; sync still waiting on the anon key + migration 2 + function deploy.
+
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
 - New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.

@@ -34,7 +34,11 @@
   </section>
   <section id="history" class="tab"><h2>History</h2><canvas id="chart" width="600" height="200"></canvas><ul id="hlist" class="list"></ul></section>
   <section id="bank" class="tab"><h2>Word Bank</h2><ul id="blist" class="list"></ul></section>
-  <section id="league" class="tab"><h2>This week</h2><p class="big" id="xp">0 XP</p><p class="muted">Streak: <span id="streak">0</span> days. Leaderboard needs the backend (M2+).</p></section>
+  <section id="league" class="tab"><h2>This week</h2><p class="big" id="xp">0 XP</p><p class="muted">Streak: <span id="streak">0</span> days. Leaderboard needs the backend (M2+).</p>
+    <h2 class="sub">Your data</h2>
+    <p class="muted left">Everything is stored only in this browser. Audio is never recorded or saved.</p>
+    <div class="row left"><button id="export">Export my data</button><button id="wipe" class="danger">Delete all my data</button></div>
+    <p id="datamsg" class="muted left" aria-live="polite"></p></section>
 </main>
 <nav aria-label="Sections">
   <button data-tab="practice" class="on">Practice</button>

@@ -126,5 +126,26 @@ function render() {
   if (!days.has(localDay(d))) d.setDate(d.getDate() - 1);
   while (days.has(localDay(d))) { s++; d.setDate(d.getDate() - 1); } $("streak").textContent = s;
 }
+// ---- data controls (export / delete)
+const DATA_KEYS = ["history", "bank", "usage", "xp"];
+$("export").onclick = () => {
+  const out = Object.fromEntries(DATA_KEYS.map((k) => [k, state[k]]));
+  const url = URL.createObjectURL(new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), ...out }, null, 2)], { type: "application/json" }));
+  Object.assign(document.createElement("a"), { href: url, download: "cadence-data.json" }).click();
+  URL.revokeObjectURL(url); $("datamsg").textContent = "Exported cadence-data.json.";
+};
+let wipeArmed = null;
+$("wipe").onclick = () => {
+  const b = $("wipe");
+  if (!wipeArmed) {
+    b.textContent = "Tap again to confirm"; $("datamsg").textContent = "This removes your history, Word Bank, XP and daily usage from this browser.";
+    wipeArmed = setTimeout(() => { wipeArmed = null; b.textContent = "Delete all my data"; $("datamsg").textContent = ""; }, 5000); return;
+  }
+  clearTimeout(wipeArmed); wipeArmed = null;
+  try { DATA_KEYS.forEach((k) => localStorage.removeItem("cadence." + k)); } catch {}
+  state.history = []; state.bank = {}; state.usage = {}; state.xp = {};
+  b.textContent = "Delete all my data"; $("datamsg").textContent = "All data deleted."; render();
+};
+
 pick(); markCat(); render();
 window.__cadence = { submit, state }; // for tests/screenshots
