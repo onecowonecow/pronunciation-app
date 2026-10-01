@@ -57,6 +57,11 @@
 - Web onboarding: first-run goal picker with the orb, drops the user on a matching first sentence; shown once (`cadence.onboarded`), skippable. Flow and the "never shown twice" rule are asserted in `tools/screenshots.mjs` (run by Pages CI); screenshot `0-onboarding.png` added to the gallery.
 - Not yet done: native SwiftUI onboarding (same flow), the post-first-score paywall (needs RevenueCat + App Store Connect product), orb as centre tab button, VoiceOver/Dynamic Type pass.
 
+## Latest routine run (13:47 UTC)
+- CI + Pages green on 99f403c; live site serves the onboarding.
+- Native onboarding (`OnboardingView`, full-screen cover on first launch, goal stored in `@AppStorage("goal")`, Practice switches category on change). **First compile pending on CI.** Paywall step intentionally omitted until RevenueCat exists.
+- Remaining unblocked: orb as centre tab button, VoiceOver / Dynamic Type pass. After that everything is blocked on the user.
+
 ## Supabase session
 - User reports schema applied (unverified from here: Supabase MCP not authenticated in cloud sessions).
 - New migration `20260930000002_word_bank_upsert.sql` (**apply it too**): `upsert_weak_words` keeps word mastery instead of resetting it; SQL-tested.

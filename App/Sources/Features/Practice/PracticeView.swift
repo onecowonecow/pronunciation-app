@@ -4,6 +4,7 @@ import CadenceCore
 struct PracticeView: View {
     @StateObject private var vm = PracticeViewModel()
     @EnvironmentObject private var store: ProgressStore
+    @AppStorage("goal") private var goal = ""
 
     var body: some View {
         ScrollView {
@@ -22,7 +23,8 @@ struct PracticeView: View {
             .padding(20)
         }
         .background(Tokens.ink.ignoresSafeArea())
-        .onAppear { vm.store = store }
+        .onAppear { vm.store = store; if Sentences.categories.contains(goal) { vm.category = goal } }
+        .onChange(of: goal) { _, g in if Sentences.categories.contains(g) { vm.category = g } }
     }
 
     private var header: some View {

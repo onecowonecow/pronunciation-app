@@ -9,6 +9,9 @@ struct CadenceApp: App {
 }
 
 struct RootView: View {
+    @AppStorage("onboarded") private var onboarded = false
+    @AppStorage("goal") private var goal = ""
+
     var body: some View {
         TabView {
             PracticeView().tabItem { Label("Practice", systemImage: "waveform") }
@@ -18,5 +21,11 @@ struct RootView: View {
             SettingsView().tabItem { Label("Settings", systemImage: "gearshape") }
         }
         .tint(Tokens.magenta)
+        .fullScreenCover(isPresented: Binding(get: { !onboarded }, set: { _ in })) {
+            OnboardingView { picked in
+                if let picked { goal = picked }
+                onboarded = true
+            }
+        }
     }
 }
